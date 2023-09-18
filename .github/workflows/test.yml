@@ -13,8 +13,8 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     outputs:
-      # fail_message: ${{ steps.validate-fails-test.outputs.response }}
-      success_message: ${{ steps.validate-success-test.outputs.response }}
+      message: ${{ steps.validate-fails-test.outputs.response }}
+      message: ${{ steps.validate-success-test.outputs.response }}
     steps:
       - name: Checkout de repositorio
         uses: actions/checkout@v2
@@ -58,5 +58,4 @@ jobs:
     steps:
       - name: print
         id: print
-        # run: echo ${{ needs.job1.outputs.fail_message }}
-        run: echo ${{ needs.job1.outputs.success_message }}
+        run: echo ${{ needs.job1.outputs.message }}
