@@ -71,7 +71,7 @@ jobs:
           git checkout -b release
           git push -f -u origin release
       - name: merge release branch to main
-        uses: tukaszek/merge-release-action@master
+        uses: tukasz/direct-merge-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source_branch: release
