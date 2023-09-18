@@ -13,7 +13,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     outputs:
-      message: ${{ steps.validate-fails-test.outputs.response }}
+      message: ${{ steps.validate-success-test.outputs.response }}
     steps:
       - name: Checkout de repositorio
         uses: actions/checkout@v2
@@ -44,7 +44,8 @@ jobs:
         if: ${{ success() }}
         env:
           MESSAGE: Ok
-        run: echo "::set-output name=response::${MESSAGE}"
+        # run: echo "::set-output name=response::${MESSAGE}"
+        run: echo "response=${MESSAGE} >> $GITHUB_OUTPUT"
 
       - name: calculate coverage
         run: |
