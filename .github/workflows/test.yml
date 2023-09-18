@@ -60,5 +60,5 @@ jobs:
       - name: print
         id: print
         run: |
-          echo "Failed: $${{ needs.job1.outputs.message_fail }}"
-          echo "Success: $${{ needs.job1.outputs.message_ok }}"
+          echo "Failed: ${{ needs.job1.outputs.message_fail }}"
+          echo "Success: ${{ needs.job1.outputs.message_ok }}"
