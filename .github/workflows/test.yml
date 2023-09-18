@@ -67,8 +67,12 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout de repositorio
+        uses: actions/checkout@v3
+
       - name: Create a release branch
         run: |
+          ls -al
           git checkout -b release
           git push -f -u origin release
       - name: merge release -> main
