@@ -37,14 +37,14 @@ jobs:
         id: validate-fails-test
         if: ${{ failure() }}
         env:
-          MESSAGE: **Bummer**
+          MESSAGE: Bummer
         run: echo "::set-output name=response::${MESSAGE}"
 
       - name: Validate success tests
         id: validate-success-test
         if: ${{ success() }}
         env:
-          MESSAGE: **Ok**
+          MESSAGE: Ok
         run: echo "::set-output name=response::${MESSAGE}"
 
       - name: calculate coverage
