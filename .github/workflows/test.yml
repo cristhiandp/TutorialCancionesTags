@@ -13,7 +13,8 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     outputs:
-      message: ${{ steps.validate-fails-test.outputs.response }}
+      fail_message: ${{ steps.validate-fails-test.outputs.response }}
+      success_message: ${{ steps.validate-success-test.outputs.response }}
     steps:
       - name: Checkout de repositorio
         uses: actions/checkout@v2
@@ -36,14 +37,14 @@ jobs:
         id: validate-fails-test
         if: ${{ failure() }}
         env:
-          MESSAGE: Bummer
+          MESSAGE: **Bummer**
         run: echo "::set-output name=response::$MESSAGE"
 
       - name: Validate success tests
         id: validate-success-test
         if: ${{ success() }}
         env:
-          MESSAGE: Ok
+          MESSAGE: **Ok**
         run: echo "::set-output name=response::$MESSAGE"
 
       - name: calculate coverage
@@ -57,4 +58,5 @@ jobs:
     steps:
       - name: print
         id: print
-        run: echo ${{ needs.job1.outputs.message }}
+        run: echo ${{ needs.job1.outputs.fail_message }}
+        run: echo ${{ needs.job1.outputs.success_message }}
