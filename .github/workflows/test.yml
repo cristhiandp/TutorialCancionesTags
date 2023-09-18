@@ -64,13 +64,14 @@ jobs:
           echo "Success: ${{ needs.job1.outputs.message_ok }}"
   job3:
     name: integrate changes
+    needs: job1
     runs-on: ubuntu-latest
     steps:
       - name: Create a release branch
         run: |
           git checkout -b release
           git push -f -u origin release
-      - name: merge release branch to main
+      - name: merge release -> main
         uses: tukasz/direct-merge-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
