@@ -3,9 +3,9 @@ name: CI
 # Controls when the action will run.
 on:
   push:
-    branches: [main]
+    branches: [main, desarrollo]
   pull_request:
-    branches: [main]
+    branches: [main, desarrollo]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -62,3 +62,17 @@ jobs:
         run: |
           echo "Failed: ${{ needs.job1.outputs.message_fail }}"
           echo "Success: ${{ needs.job1.outputs.message_ok }}"
+  job3:
+    name: integrate changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a release branch
+        run: |
+          git checkout -b release
+          git push -f -u origin release
+      - name: merge release branch to main
+        uses: tukaszek/merge-release-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: release
+          target_branch: main
