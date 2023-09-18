@@ -79,5 +79,5 @@ jobs:
         uses: tukasz/direct-merge-action@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: release
-          target_branch: main
+          source-branch: release
+          target-branch: main
