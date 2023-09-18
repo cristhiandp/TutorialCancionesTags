@@ -70,11 +70,11 @@ jobs:
       - name: Checkout de repositorio
         uses: actions/checkout@v3
 
-      - name: Create a release branch
-        run: |
-          ls -al
-          git checkout -b release
-          git push -f -u origin release
+      # - name: Create a release branch
+      #   run: |
+      #     ls -al
+      #     git checkout -b release
+      #     git push -f -u origin release
       - name: merge release -> main
         uses: tukasz/direct-merge-action@master
         with:
