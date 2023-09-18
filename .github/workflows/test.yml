@@ -38,7 +38,7 @@ jobs:
         if: ${{ failure() }}
         env:
           MESSAGE: **Bummer**
-        run: echo "::set-output name=response::$MESSAGE"
+        run: echo "::set-output name=response::${MESSAGE}"
 
       - name: Validate success tests
         id: validate-success-test
