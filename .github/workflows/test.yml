@@ -13,13 +13,14 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     outputs:
-      message: ${{ steps.validate-success-test.outputs.response }}
+      message_ok: ${{ steps.validate-success-test.outputs.response }}
+      message_fail: ${{ steps.validate-fails-test.outputs.response }}
     steps:
       - name: Checkout de repositorio
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configuración de entorno de python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: "3.7"
 
@@ -37,7 +38,7 @@ jobs:
         if: ${{ failure() }}
         env:
           MESSAGE: Bummer
-        run: echo "::set-output name=response::${MESSAGE}"
+        run: echo "response=${MESSAGE}" >> "$GITHUB_OUTPUT"
 
       - name: Validate success tests
         id: validate-success-test
@@ -45,7 +46,7 @@ jobs:
         env:
           MESSAGE: Ok
         # run: echo "::set-output name=response::${MESSAGE}"
-        run: echo "response=${MESSAGE} >> $GITHUB_OUTPUT"
+        run: echo "response=${MESSAGE}" >> "$GITHUB_OUTPUT"
 
       - name: calculate coverage
         run: |
@@ -59,5 +60,5 @@ jobs:
       - name: print
         id: print
         run: |
-          echo "Failed: $${{ needs.job1.outputs.message }}"
-          echo "Success: $${{ needs.job1.outputs.message }}"
+          echo "Failed: $${{ needs.job1.outputs.message_fail }}"
+          echo "Success: $${{ needs.job1.outputs.message_ok }}"
