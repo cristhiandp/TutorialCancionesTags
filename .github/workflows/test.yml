@@ -35,13 +35,15 @@ jobs:
       - name: Validate fails tests
         id: validate-fails-test
         if: ${{ failure() }}
-        env: MESSAGE: Bummer
+        env:
+          MESSAGE: Bummer
         run: echo "::set-output name=response::$MESSAGE"
 
       - name: Validate success tests
         id: validate-success-test
         if: ${{ success() }}
-        env: MESSAGE: Ok
+        env:
+          MESSAGE: Ok
         run: echo "::set-output name=response::$MESSAGE"
 
       - name: calculate coverage
@@ -56,4 +58,3 @@ jobs:
       - name: print
         id: print
         run: echo ${{ needs.job1.outputs.message }}
-      
